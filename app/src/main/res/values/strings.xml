@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Клавогонки</string>
+    <!--Temp-->
+    <string name="host">HOST</string>
+</resources>

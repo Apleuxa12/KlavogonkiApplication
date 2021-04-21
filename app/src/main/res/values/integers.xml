@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="splash_duration">2</integer>
+    <!--Temp-->
+    <integer name="port">9090</integer>
+</resources>
