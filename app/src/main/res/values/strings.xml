@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Клавогонки</string>
     <!--Temp-->
-    <string name="host">HOST</string>
+    <string name="host">10.0.2.2</string>
+    <string name="title_activity_username">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="emblemText">Эмблема</string>
+    <string name="yourName">Ваше имя</string>
+    <string name="beginGame">Начать игру</string>
+    <string name="tag">Автор: Мухин Д.Д.ВШЭ. Москва 2021</string>
+    <string name="loading">Загрузка…</string>
+    <string name="error">Ошибка соединения</string>
+    <string name="exit">Выход</string>
 </resources>
