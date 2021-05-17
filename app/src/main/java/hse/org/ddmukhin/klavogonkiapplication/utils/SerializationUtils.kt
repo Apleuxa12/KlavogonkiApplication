@@ -7,12 +7,12 @@ import hse.org.ddmukhin.klavogonkiapplication.remote.data.Message
 class SerializationUtils {
 
     companion object{
-        fun <T> serializeMessage(message: Message<T>): String{
+        fun <T> serializeMessage(message: T): String{
             return Gson().toJson(message)
         }
 
         inline fun <reified T> deserializeMessage(message: String): T{
-            return Gson().fromJson(message, object: TypeToken<T>(){}.type)
+            return Gson().fromJson<T>(message, object: TypeToken<T>(){}.type)
         }
     }
 

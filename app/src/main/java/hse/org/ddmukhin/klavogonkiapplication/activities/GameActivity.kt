@@ -2,6 +2,7 @@ package hse.org.ddmukhin.klavogonkiapplication.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.Log
@@ -31,8 +32,6 @@ class GameActivity : MvpActivity(), GameView {
     @InjectPresenter
     lateinit var presenter: GamePresenter
 
-    private lateinit var inputField: EditText
-
     private lateinit var binding: ActivityGameBinding
 
     private lateinit var host: String
@@ -58,6 +57,10 @@ class GameActivity : MvpActivity(), GameView {
         presenter.startGame(username.toString(), host, port)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
+
     override fun showLoading() {
         binding.loading.visibility = View.VISIBLE
         binding.theme.visibility = View.GONE
@@ -78,12 +81,13 @@ class GameActivity : MvpActivity(), GameView {
         binding.results.visibility = View.GONE
     }
 
-    override fun showError() {
+    override fun showError(errorMsg: String) {
         binding.loading.visibility = View.GONE
         binding.theme.visibility = View.GONE
         binding.text.visibility = View.GONE
         binding.input.visibility = View.GONE
         binding.error.visibility = View.VISIBLE
+        binding.error.text = errorMsg
         binding.exitButton.visibility = View.VISIBLE
         binding.results.visibility = View.GONE
     }
@@ -118,11 +122,11 @@ class GameActivity : MvpActivity(), GameView {
     }
 
     override fun addInputTextChangedListener(textWatcher: TextWatcher) {
-        inputField.addTextChangedListener(textWatcher)
+        binding.input.addTextChangedListener(textWatcher)
     }
 
     override fun clearInput() {
-        inputField.text.clear()
+        binding.input.text.clear()
     }
 
     private fun getColoredSpanned(text: String, color: Color): String{

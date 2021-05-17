@@ -17,7 +17,7 @@ interface GameView : MvpView {
     fun showGame()
 
     @StateStrategyType(AddToEndStrategy::class)
-    fun showError()
+    fun showError(errorMsg: String)
 
     @StateStrategyType(AddToEndStrategy::class)
     fun showColoredText(coloredText: ColoredText)

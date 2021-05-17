@@ -41,6 +41,7 @@ class GamePresenter @Inject constructor() : MvpPresenter<GameView>() {
             var socket: Socket? = null
             while (true) {
                 try {
+                    Log.d("Socket", "Trying to connect...")
                     if (socket != null || connectionTries >= connectionMaxTries)
                         break
                     socket = Socket(host, port)
@@ -50,18 +51,23 @@ class GamePresenter @Inject constructor() : MvpPresenter<GameView>() {
                     Thread.sleep(1000)
                 }
             }
-            if(socket != null)
+            if(socket != null) {
                 UserThread(socket, userName, params[0]!!).start()
+            }
             return socket != null
         }
 
         override fun onPostExecute(result: Boolean?) {
-            if(result!!) viewState.showGame() else viewState.showError()
+            if(result!!) viewState.showGame() else viewState.showError("Не удалось подключиться к серверу")
         }
     }
 
     fun startGame(userName: String, host: String, port: Int) {
         ThreadAsyncTask(viewState, userName, host, port, 10).execute(this)
+    }
+
+    fun showError(errorMsg: String){
+        viewState.showError(errorMsg)
     }
 
     fun textChanged(coloredText: ColoredText) {
