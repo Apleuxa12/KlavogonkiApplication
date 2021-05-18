@@ -2,13 +2,16 @@ package hse.org.ddmukhin.klavogonkiapplication.remote.threads
 
 import android.util.Log
 import hse.org.ddmukhin.klavogonkiapplication.presenters.GamePresenter
+import hse.org.ddmukhin.klavogonkiapplication.remote.data.Color
 import hse.org.ddmukhin.klavogonkiapplication.remote.data.ColoredText
+import hse.org.ddmukhin.klavogonkiapplication.remote.data.Results
 import hse.org.ddmukhin.klavogonkiapplication.remote.data.Text
 import hse.org.ddmukhin.klavogonkiapplication.utils.SerializationUtils
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintWriter
+import java.lang.NullPointerException
 import java.net.Socket
 
 class UserThread(
@@ -37,20 +40,29 @@ class UserThread(
             Log.d("UserThread", "$userName connected")
             sendMessage(userName)
 //      Get Text from server
-            text = readMessage()
-            var message = ColoredText(text, ArrayList(), false)
+            val textLine = reader.readLine() ?: throw NullPointerException("Потеряно соединение с сервером")
+            text = readMessage(textLine)
+            var message = ColoredText(text, calculateInitialColors(text), false)
+            gamePresenter.textChanged(message)
             do {
 //          Send-read messages to/from server
                 if (inputText.isEmpty())
                     continue
-                Log.d("INPUT", inputText)
+//                Log.d("INPUT", inputText)
                 sendMessage(inputText)
-                message = readMessage()
+                val inLine = reader.readLine() ?: throw NullPointerException("Потеряно соединение с сервером")
+                message = readMessage(inLine)
                 gamePresenter.textChanged(message)
             } while (!message.isFinished)
-            gamePresenter.showResults(readMessage())
+            val resultLine = reader.readLine() ?: ""
+            if(resultLine.isNotEmpty())
+                gamePresenter.showResults(readMessage(resultLine))
+            else
+                gamePresenter.showResults(Results(0, 0.0))
         } catch (e: IOException) {
             gamePresenter.showError("Ошибка соединения")
+        }catch(e: NullPointerException){
+            gamePresenter.showError(e.message!!)
         } finally {
             close()
         }
@@ -62,9 +74,23 @@ class UserThread(
         socket.close()
     }
 
+    private fun calculateInitialColors(text: Text) : ArrayList<Color>{
+        val colors = ArrayList<Color>()
+
+        for(letter in text.value){
+            colors.add(
+                when(letter){
+                    ' ' -> Color.SPACE
+                    else -> Color.NEUTRAL
+                }
+            )
+        }
+        return colors
+    }
+
     @Throws(IOException::class)
-    private inline fun <reified T> readMessage(): T {
-        val msg = SerializationUtils.deserializeMessage<T>(reader.readLine())
+    private inline fun <reified T> readMessage(input: String): T {
+        val msg = SerializationUtils.deserializeMessage<T>(input)
         Log.d("READ", msg.toString())
         return msg
     }

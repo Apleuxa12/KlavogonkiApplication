@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,34 +13,38 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:fontFamily="@font/open_sans"
+        android:textSize="26sp"
         />
 
     <TextView
         android:id="@+id/theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/open_sans"
+        android:textSize="26sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:text="Lorem ipsum"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Lorem ipsum" />
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/theme"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="408dp"
+        android:layout_height="223dp"
         android:layout_marginTop="10dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="26sp"
+        android:autoSizeStepGranularity="2sp"
         android:autoSizeTextType="uniform"
+        android:fontFamily="@font/open_sans"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/theme"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
         quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        android:autoSizeMinTextSize="12sp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeStepGranularity="2sp"
-        />
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 
     <EditText
         android:id="@+id/input"
@@ -48,8 +53,10 @@
         app:layout_constraintTop_toBottomOf="@+id/text"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:fontFamily="@font/open_sans"
         android:autofillHints=""
-        android:inputType="" />
+        android:inputType=""
+        android:hint="@string/inputHint"/>
 
     <TextView
         android:id="@+id/loading"
@@ -61,6 +68,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/loading"
         android:textSize="36sp"
+        android:fontFamily="@font/open_sans"
         />
 
     <TextView
@@ -73,6 +81,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/error"
         android:textSize="36sp"
+        android:fontFamily="@font/open_sans"
         />
 
     <Button
@@ -84,6 +93,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="10dp"
         android:text="@string/exit"
+        android:fontFamily="@font/open_sans"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

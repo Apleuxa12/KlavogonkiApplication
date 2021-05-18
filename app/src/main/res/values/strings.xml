@@ -12,4 +12,6 @@
     <string name="loading">Загрузка…</string>
     <string name="error">Ошибка соединения</string>
     <string name="exit">Выход</string>
+    <string name="inputHint">Ввод</string>
+    <string name="resultPlaceholder">Результаты: время - %1$s, скорость - %2$s.</string>
 </resources>

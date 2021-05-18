@@ -2,7 +2,6 @@ package hse.org.ddmukhin.klavogonkiapplication.utils
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import hse.org.ddmukhin.klavogonkiapplication.remote.data.Message
 
 class SerializationUtils {
 

@@ -33,11 +33,9 @@ class GamePresenter @Inject constructor() : MvpPresenter<GameView>() {
 
         private var connectionTries = 0
 
-        override fun onPreExecute() {
-            viewState.showLoading()
-        }
-
         override fun doInBackground(vararg params: GamePresenter?): Boolean {
+            viewState.showLoading()
+            Thread.sleep(2000)
             var socket: Socket? = null
             while (true) {
                 try {
