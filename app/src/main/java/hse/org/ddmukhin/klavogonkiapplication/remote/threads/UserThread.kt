@@ -44,10 +44,12 @@ class UserThread(
             text = readMessage(textLine)
             var message = ColoredText(text, calculateInitialColors(text), false)
             gamePresenter.textChanged(message)
+            var previous = ""
             do {
 //          Send-read messages to/from server
-                if (inputText.isEmpty())
+                if (inputText.isEmpty() || inputText == previous)
                     continue
+                previous = inputText
 //                Log.d("INPUT", inputText)
                 sendMessage(inputText)
                 val inLine = reader.readLine() ?: throw NullPointerException("Потеряно соединение с сервером")

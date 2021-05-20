@@ -35,7 +35,6 @@ class GamePresenter @Inject constructor() : MvpPresenter<GameView>() {
 
         override fun doInBackground(vararg params: GamePresenter?): Boolean {
             viewState.showLoading()
-            Thread.sleep(2000)
             var socket: Socket? = null
             while (true) {
                 try {
@@ -61,7 +60,7 @@ class GamePresenter @Inject constructor() : MvpPresenter<GameView>() {
     }
 
     fun startGame(userName: String, host: String, port: Int) {
-        ThreadAsyncTask(viewState, userName, host, port, 10).execute(this)
+        ThreadAsyncTask(viewState, userName, host, port, 5).execute(this)
     }
 
     fun showError(errorMsg: String){

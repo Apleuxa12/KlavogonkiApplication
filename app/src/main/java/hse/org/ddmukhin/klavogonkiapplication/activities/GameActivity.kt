@@ -20,6 +20,7 @@ import hse.org.ddmukhin.klavogonkiapplication.presenters.GamePresenter
 import hse.org.ddmukhin.klavogonkiapplication.remote.data.Color
 import hse.org.ddmukhin.klavogonkiapplication.remote.data.ColoredText
 import hse.org.ddmukhin.klavogonkiapplication.remote.data.Results
+import hse.org.ddmukhin.klavogonkiapplication.utils.SystemUtils
 import hse.org.ddmukhin.klavogonkiapplication.utils.set
 import hse.org.ddmukhin.klavogonkiapplication.views.GameView
 import kotlinx.coroutines.*
@@ -49,7 +50,7 @@ class GameActivity : MvpActivity(), GameView {
         binding = ActivityGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        host = getString(R.string.host)
+        host = if(SystemUtils.isGenymotion()) getString(R.string.genyHost) else getString(R.string.host)
         port = resources.getInteger(R.integer.port)
 
         binding.exitButton.setOnClickListener {
@@ -61,6 +62,9 @@ class GameActivity : MvpActivity(), GameView {
         val username = intent.extras?.get("username")
 
         presenter.startGame(username.toString(), host, port)
+
+        if(binding.theme.text.isEmpty())
+            binding.input.visibility = View.GONE
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -158,6 +162,6 @@ class GameActivity : MvpActivity(), GameView {
     }
 
     private fun convertSpeed(speed: Double): String{
-        return String.format("%02f слов в минуту", speed)
+        return String.format("%02f слов в секунду", speed)
     }
 }

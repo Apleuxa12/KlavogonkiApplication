@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Клавогонки</string>
     <!--Temp-->
-    <string name="host">10.0.3.2</string>
-    <string name="title_activity_username">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="host">192.168.88.11</string>
+    <string name="genyHost">10.0.3.2</string>
     <string name="emblemText">Эмблема</string>
     <string name="yourName">Ваше имя</string>
     <string name="beginGame">Начать игру</string>
